@@ -12,16 +12,16 @@
 }
 
 .pac-dot {
-    background-color: green;
-    border: 5px solid white;
+    background-color: #9D5353;
+    border: 5px solid rgb(247, 204, 172);
     box-sizing: border-box;
 }
 
 .wall {
-    background-color: blue;
+    background-color: #3A3845;
 }
 
 .power-pellet {
-    background-color: rgb(9, 0, 128);
+    background-color: #B3541E;
     border-radius: 10px;
 }
