@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const grid = document.querySelector('.grid')
     const scoreDisplay = document.getElementById('score')
     const width = 28
-
+    let score = 0
 
     const layout = [
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -38,9 +38,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // 0 - pac-dots
         // 1 - wall
         // 2 - ghost-lair
-        // 3 - power-pellet
+        // 3 - power-strawberry
         // 4 - empty
 
+    var objImage = null;
 
 
     function createBoard() {
@@ -54,23 +55,88 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (layout[i] === 1) {
                 squares[i].classList.add('wall')
             } else if (layout[i] === 3) {
-                squares[i].classList.add('power-pellet')
+                squares[i].classList.add('strawberry')
+                    // const square = new Image();
             }
 
 
+
         }
+
     }
+
     createBoard()
 
+    let pacmanCurrentIndex = 490
+    squares[pacmanCurrentIndex].classList.add('pac-man')
+
+    function movePacman(e) {
+        squares[pacmanCurrentIndex].classList.remove('pac-man')
+        switch (e.keyCode) {
+            case 37:
+                if (
+                    pacmanCurrentIndex % width !== 0 &&
+                    !squares[pacmanCurrentIndex - 1].classList.contains('wall') &&
+                    !squares[pacmanCurrentIndex - 1].classList.contains('ghost-lair')
+                )
+                    pacmanCurrentIndex -= 1
+                if (squares[pacmanCurrentIndex - 1] === squares[363]) {
+                    pacmanCurrentIndex = 391
+                }
+                break
+            case 38:
+                if (
+                    pacmanCurrentIndex - width >= 0 &&
+                    !squares[pacmanCurrentIndex - width].classList.contains('wall') &&
+                    !squares[pacmanCurrentIndex - width].classList.contains('ghost-lair')
+                )
+                    pacmanCurrentIndex -= width
+                break
+            case 39:
+                if (
+                    pacmanCurrentIndex % width < width - 1 &&
+                    !squares[pacmanCurrentIndex + 1].classList.contains('wall') &&
+                    !squares[pacmanCurrentIndex + 1].classList.contains('ghost-lair')
+                )
+                    pacmanCurrentIndex += 1
+                if (squares[pacmanCurrentIndex + 1] === squares[392]) {
+                    pacmanCurrentIndex = 364
+                }
+                break
+            case 40:
+                if (
+                    pacmanCurrentIndex + width < width * width &&
+                    !squares[pacmanCurrentIndex + width].classList.contains('wall') &&
+                    !squares[pacmanCurrentIndex + width].classList.contains('ghost-lair')
+                )
+                    pacmanCurrentIndex += width
+                break
+        }
+        squares[pacmanCurrentIndex].classList.add('pac-man')
+        pacDotEaten()
+        powerStrawberryEaten()
+        checkForGameOver()
+        checkForWin()
+    }
+    document.addEventListener('keyup', movePacman)
+
+    function pacDotEaten() {
+        if (squares[pacmanCurrentIndex].classList.contains('pac-dot')) {
+            score++
+            scoreDisplay.innerHTML = score
+            squares[pacmanCurrentIndex].classList.remove('pac-dot')
+        }
+    }
+
+    function powerStrawberryEaten() {
+        if (squares[pacmanCurrentIndex].classList.contains('strawberry')) {
+            score += 10
+            scoreDisplay.innerHTML = score
+            squares[pacmanCurrentIndex].classList.remove('strawberry')
+        }
 
 
-
-
-
-
-
-
-
+    }
 
 
 

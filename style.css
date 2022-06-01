@@ -1,27 +1,42 @@
-.grid {
-    display: flex;
-    flex-wrap: wrap;
-    width: 560px;
-    height: 560px;
-    border: solid black;
-}
-
-.grid div {
-    width: 20px;
-    height: 20px;
-}
-
-.pac-dot {
-    background-color: green;
-    border: 5px solid white;
-    box-sizing: border-box;
-}
-
-.wall {
-    background-color: blue;
-}
-
-.power-pellet {
-    background-color: green;
-    border-radius: 10px;
-}
+    .grid {
+        display: flex;
+        flex-wrap: wrap;
+        width: 560px;
+        height: 560px;
+        border: solid black;
+    }
+    
+    .grid div {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .pac-dot {
+        background-color: #9D5353;
+        border: 5px solid rgb(247, 204, 172);
+        box-sizing: border-box;
+    }
+    
+    body {
+        background-color: aliceblue;
+    }
+    
+    .wall {
+        background-color: #3A3845;
+    }
+    /* div.image { */
+    /* background-image: url("https://mpng.subpng.com/20180519/czb/kisspng-strawberry-pie-fruit-5b00e8cc28e914.6420232615267862521676.jpg"); */
+    /* width: 10px; */
+    /* height: 20px; */
+    /* border-radius: 10px; */
+    /* } */
+    
+    .pac-man {
+        background-color: yellow;
+        border-radius: 10px;
+    }
+    
+    .strawberry {
+        background-color: palevioletred;
+        border-radius: 10px;
+    }
