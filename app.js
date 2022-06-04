@@ -35,11 +35,11 @@ document.addEventListener('DOMContentLoaded', () => {
         1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
     ]
     const squares = []
-        // 0 - pac-dots
-        // 1 - wall
-        // 2 - ghost-lair
-        // 3 - power-strawberry
-        // 4 - empty
+    // 0 - pac-dots
+    // 1 - wall
+    // 2 - ghost-lair
+    // 3 - power-strawberry
+    // 4 - empty
 
     var objImage = null;
 
@@ -49,18 +49,22 @@ document.addEventListener('DOMContentLoaded', () => {
             const square = document.createElement('div')
             grid.appendChild(square)
             squares.push(square)
-                //add layout to the board// 
+            //add layout to the board// 
             if (layout[i] === 0) {
                 squares[i].classList.add('pac-dot')
             } else if (layout[i] === 1) {
                 squares[i].classList.add('wall')
             } else if (layout[i] === 3) {
                 squares[i].classList.add('strawberry')
-                    // const square = new Image();
+                // const square = new Image();
+                //dynamically add an image and set its attribute
+                let img = document.createElement("img");
+                img.src = "images/strawberry.png"
+                img.id = "picture"
+                img.style.height = "20px"
+                img.style.width = "20px"
+                squares[i].appendChild(img);
             }
-
-
-
         }
 
     }
@@ -133,6 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
             score += 10
             scoreDisplay.innerHTML = score
             squares[pacmanCurrentIndex].classList.remove('strawberry')
+            squares[pacmanCurrentIndex].replaceChildren()
         }
 
 
