@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 squares[i].classList.add('wall')
             } else if (layout[i] === 3) {
                 squares[i].classList.add('strawberry')
-                    // const square = new Image();
+                addImageToSquare(squares[i], "images/strawberry.png")
             }
 
 
@@ -69,9 +69,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let pacmanCurrentIndex = 490
     squares[pacmanCurrentIndex].classList.add('pac-man')
+    addImageToSquare(squares[pacmanCurrentIndex], "images/woman2.png")
+
 
     function movePacman(e) {
         squares[pacmanCurrentIndex].classList.remove('pac-man')
+        squares[pacmanCurrentIndex].replaceChildren()
         switch (e.keyCode) {
             case 37:
                 if (
@@ -113,6 +116,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 break
         }
         squares[pacmanCurrentIndex].classList.add('pac-man')
+        addImageToSquare(squares[pacmanCurrentIndex], "images/woman2.png")
+
         pacDotEaten()
         powerStrawberryEaten()
         checkForGameOver()
@@ -133,13 +138,23 @@ document.addEventListener('DOMContentLoaded', () => {
             score += 10
             scoreDisplay.innerHTML = score
             squares[pacmanCurrentIndex].classList.remove('strawberry')
+            squares[pacmanCurrentIndex].replaceChildren()
         }
 
 
     }
 
+    function addImageToSquare(div, imgSource) {
+        let img = document.createElement("img");
+        img.src = imgSource
+        img.id = "picture"
+        img.style.height = "20px"
+        img.style.width = "20px"
+        div.appendChild(img);
+    }
 
+    function removeImgFromSquare(div) {
 
-
+    }
 
 })
