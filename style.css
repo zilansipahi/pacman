@@ -1,14 +1,14 @@
     .grid {
         display: flex;
         flex-wrap: wrap;
-        width: 560px;
-        height: 560px;
+        width: 700px;
+        height: 700px;
         border: solid black;
     }
     
     .grid div {
-        width: 20px;
-        height: 20px;
+        width: 25px;
+        height: 25px;
     }
     
     .pac-dot {
@@ -24,19 +24,11 @@
     .wall {
         background-color: #3A3845;
     }
-    /* div.image { */
-    /* background-image: url("https://mpng.subpng.com/20180519/czb/kisspng-strawberry-pie-fruit-5b00e8cc28e914.6420232615267862521676.jpg"); */
-    /* width: 10px; */
-    /* height: 20px; */
-    /* border-radius: 10px; */
-    /* } */
-    
-    .pac-man {
-        background-color: yellow;
-        border-radius: 10px;
-    }
     
     .strawberry {
-        background-color: palevioletred;
+        background-color: rgb(247, 204, 172);
+    }
+    /*.pac-man {
+        background-color: yellow;
         border-radius: 10px;
     }

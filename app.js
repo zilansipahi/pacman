@@ -1,3 +1,9 @@
+window.addEventListener("keydown", function(e) {
+    if (["Space", "ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"].indexOf(e.code) > -1) {
+        e.preventDefault();
+    }
+}, false);
+
 document.addEventListener('DOMContentLoaded', () => {
     const grid = document.querySelector('.grid')
     const scoreDisplay = document.getElementById('score')
@@ -56,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 squares[i].classList.add('wall')
             } else if (layout[i] === 3) {
                 squares[i].classList.add('strawberry')
-                    // const square = new Image();
+                addImageToSquare(squares[i], "images/strawberry.png")
             }
 
 
@@ -69,11 +75,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let pacmanCurrentIndex = 490
     squares[pacmanCurrentIndex].classList.add('pac-man')
+    addImageToSquare(squares[pacmanCurrentIndex], "images/woman2.png")
 
-    function movePacman(e) {
+    let direction = "stop"
+
+    function keyFire() {
+
+        move()
+        setTimeout(keyFire, 250);
+    }
+
+    keyFire();
+
+    function move() {
         squares[pacmanCurrentIndex].classList.remove('pac-man')
-        switch (e.keyCode) {
-            case 37:
+        squares[pacmanCurrentIndex].replaceChildren()
+        switch (direction) {
+            case "left":
                 if (
                     pacmanCurrentIndex % width !== 0 &&
                     !squares[pacmanCurrentIndex - 1].classList.contains('wall') &&
@@ -84,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     pacmanCurrentIndex = 391
                 }
                 break
-            case 38:
+            case "up":
                 if (
                     pacmanCurrentIndex - width >= 0 &&
                     !squares[pacmanCurrentIndex - width].classList.contains('wall') &&
@@ -92,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 )
                     pacmanCurrentIndex -= width
                 break
-            case 39:
+            case "right":
                 if (
                     pacmanCurrentIndex % width < width - 1 &&
                     !squares[pacmanCurrentIndex + 1].classList.contains('wall') &&
@@ -103,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     pacmanCurrentIndex = 364
                 }
                 break
-            case 40:
+            case "down":
                 if (
                     pacmanCurrentIndex + width < width * width &&
                     !squares[pacmanCurrentIndex + width].classList.contains('wall') &&
@@ -113,12 +131,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 break
         }
         squares[pacmanCurrentIndex].classList.add('pac-man')
+        addImageToSquare(squares[pacmanCurrentIndex], "images/woman2.png")
+
         pacDotEaten()
         powerStrawberryEaten()
-        checkForGameOver()
-        checkForWin()
     }
-    document.addEventListener('keyup', movePacman)
+
+    function switchDirection(e) {
+        switch (e.keyCode) {
+            case 37:
+                direction = "left"
+                break
+            case 38:
+                direction = "up"
+                break
+            case 39:
+                direction = "right"
+                break
+            case 40:
+                direction = "down"
+                break
+        }
+    }
+    document.addEventListener('keyup', switchDirection)
 
     function pacDotEaten() {
         if (squares[pacmanCurrentIndex].classList.contains('pac-dot')) {
@@ -133,13 +168,24 @@ document.addEventListener('DOMContentLoaded', () => {
             score += 10
             scoreDisplay.innerHTML = score
             squares[pacmanCurrentIndex].classList.remove('strawberry')
+            squares[pacmanCurrentIndex].replaceChildren()
+            addImageToSquare(squares[pacmanCurrentIndex], "images/woman2.png")
         }
 
 
     }
 
+    function addImageToSquare(div, imgSource, height, width) {
+        let img = document.createElement("img");
+        img.src = imgSource
+        img.id = "picture"
+        img.style.height = "25px"
+        img.style.width = "25px"
+        div.appendChild(img);
+    }
 
+    function removeImgFromSquare(div) {
 
-
+    }
 
 })
